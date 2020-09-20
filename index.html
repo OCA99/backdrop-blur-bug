@@ -5,15 +5,53 @@
     <title>Hello World!</title>
   </head>
   <body>
-    <h1>Hello World!</h1>
-    <!-- All of the Node.js APIs are available in this renderer process. -->
-    We are using Node.js <script>document.write(process.versions.node)</script>,
-    Chromium <script>document.write(process.versions.chrome)</script>,
-    and Electron <script>document.write(process.versions.electron)</script>.
-
     <script>
       // You can also require other files to run in this process
-      require('./renderer.js')
+      function blurre() {
+        var o = document.getElementById("overlay");
+        o.classList.add("blur");
+      }
+      function unblurre() {
+        var o = document.getElementById("overlay");
+        o.classList.remove("blur");
+      }
     </script>
+    <div class="image"></div>
+    <div id="overlay" class="overlay"></div>
+    <button class="button" onclick="blurre()">Blur image</button>
+    <button class="button right" onclick="unblurre()">Unblur image</button>
   </body>
+  <style type="text/css">
+    body, html {
+      height: 100%;
+      margin: 0;
+    }
+    .image {
+      height: 100%;
+      width: 100%;
+      background-image: url("barcelona.jpg");
+      position: absolute;
+    }
+    .overlay {
+      height: 100%;
+      width: 100%;
+      position: absolute;
+      background-color: rgba(255,255,255,0.1);
+      transition: backdrop-filter 0.2s ease;
+      backdrop-filter: blur(0px) saturate(100%);
+      position: absolute;
+    }
+    .overlay.blur {
+      backdrop-filter: blur(60px) saturate(60%);
+    }
+    .button {
+      z-index: 1000;
+      position: absolute;
+      top: 20px;
+      left: 20px;
+    }
+    .right {
+      left: 120px;
+    }
+  </style>
 </html>
